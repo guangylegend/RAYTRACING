@@ -1,0 +1,24 @@
+type vertex [3]float
+type colour [3]float
+type matter { colour colour float float float }
+type light { vertex colour }
+type sphere { int matter vertex float }
+type polygon { int matter vertex ptr int ptr }
+type world { colour int ptr int ptr }
+
+var light l1 {[-500 -50 -400] [.4 .4 .4]}
+var light l2 {[300 -50 -400] [.5 .5 .5]}
+var [2]ptr lights [l1 l2]
+var sphere s1 { 1 {[1 .5 0] [1 .5 0] .9 30 .4} [ -100 -70 500] 200 }
+var sphere s2 { 1 {[1 0 0] [1 0 0] .9 30 .4}   [  90  55 120] 75   }
+var sphere s3 { 1 {[0 1 1] [0 1 1] .6 30 .3}   [ -90  55 120] 75   }
+var [15]float vrt [-300  130 1000 
+                    300  130 1000 
+                    300  130 0 
+                   -300  130 0 
+                   -300  130 1000]
+var polygon p  { 2 {[0.6 0.6 0.6] [0.6 0.6 0.6] .9 30 .3} [0 0 0] 0 4 vrt }
+var [4]ptr objects [p s1 s2 s3]
+var world world { [.1 .1 .1] 2 lights 4 objects }
+
+export world
